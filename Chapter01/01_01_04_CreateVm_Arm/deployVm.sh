@@ -12,3 +12,5 @@ az group deployment create \
 --resource-group $GROUP_NAME \
 --template-file $ARM_TEMPLATE \
 --parameters @$OVERRIDE_PROPS
+# Note the use of the @ symbol in front of the parameters file. This @ symbol is required by the az group
+# deployment create command.
