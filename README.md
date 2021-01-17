@@ -76,3 +76,5 @@
 |----|----|
 | az account list --output table | Elenca le tue subscriptions |
 | az account set --subscription "My Demos" | Imposta la sottoscrizione da usare |
+| az resource list --output table | Elenca le risorse associate alla sottoscrizione corrente |
+| az group list --output table | Elenca i gruppi associati alla sottoscrizione corrente |
