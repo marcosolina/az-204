@@ -16,7 +16,7 @@ namespace _01_01_01_CreateVm
             /*
              * Create the management client. This will be used for all the oprations
              */
-            AzureCredentials azCredentials = SdkContext.AzureCredentialsFactory.FromFile("./azureauth.properties");
+            AzureCredentials azCredentials = SdkContext.AzureCredentialsFactory.FromFile("../../../azureauth.properties");
 
             IAzure azure = Azure.Configure().WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic).Authenticate(azCredentials).WithDefaultSubscription();
 
