@@ -34,9 +34,9 @@
   - Network security group
   - Security rule
 
-#### [Azure Resource Manager (ARM)](./Chapter01/01_01_04_CreateVm_Arm/README.md)
+#### [Azure Resource Manager (ARM)](./Chapter01/01_01_04_CreateVm_Arm/)
 
-#### [Docker: Azure Container Registry (ACR)](./Chapter01/01_01_05_Docker/README.md)
+#### [Docker: Azure Container Registry (ACR)](./Chapter01/01_01_05_Docker/)
 
 ## Az CLI Comandi
 
