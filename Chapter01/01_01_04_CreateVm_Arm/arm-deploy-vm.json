@@ -33,7 +33,8 @@
     },
     "variables":{
         "osDiskName":"_OSDisk1",
-        "region": "uksouth"
+        "region": "uksouth",
+        "vmPublicIpAddressName": "MarcoPublicIp"
     },
     "resources":[
         {
@@ -111,6 +112,9 @@
                             "privateIPAllocationMethod":"Dynamic",
                             "subnet":{
                                 "id":"[resourceId('Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworks_az204VNET_name'),parameters('subnets_az204Subnet_name'))]"
+                            },
+                            "publicIPAddress": {
+                                "id": "[variables('vmPublicIpAddressName')]"
                             },
                             "primary":true,
                             "privateIPAddressVersion":"IPv4"

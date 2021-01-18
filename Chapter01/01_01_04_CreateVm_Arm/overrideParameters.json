@@ -15,7 +15,7 @@
             "value":"az204MarcoSubnet"
         },
         "virtualMachines_az204VMTesting_id":{
-            "value":"[concat(parameters('virtualMachines_az204VMTesting_name'),'_OSDisk1_1_39c654d89d88405e968db84b722002d1')]"
+            "value":"[concat(parameters('virtualMachines_az204VMTesting_name'),'_OSDisk1_Marco')]"
         },
         "virtualMachines_adminUser":{
             "value":"marcoadminuser"
