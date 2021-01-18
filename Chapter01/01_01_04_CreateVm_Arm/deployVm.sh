@@ -7,7 +7,7 @@ export ARM_TEMPLATE=arm-deploy-vm.json
 export OVERRIDE_PROPS=overrideParameters.json
 
 az group create --name $GROUP_NAME --location "UK South"
-az group deployment create \
+az deployment group create \
 --name $DEPLOYMENT_NAME \
 --resource-group $GROUP_NAME \
 --template-file $ARM_TEMPLATE \

@@ -32,7 +32,7 @@
         }
     },
     "variables":{
-        "osDiskName":"_OSDisk1_1_39c654d89d88405e968db84b722002d1",
+        "osDiskName":"_OSDisk1",
         "region": "uksouth"
     },
     "resources":[
