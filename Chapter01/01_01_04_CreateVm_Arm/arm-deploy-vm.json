@@ -29,6 +29,24 @@
         "virtualMachines_adminpassword":{
             "defaultValue":"Pa$$w0rd",
             "type":"securestring"
+        },
+        "publicIPAddressType": {
+            "type": "string",
+            "defaultValue": "Dynamic",
+            "allowedValues": [
+                "Dynamic",
+                "Static"
+            ],
+            "metadata": {
+                "description": "Type of public IP address"
+            }
+        },
+        "dnsLabelPrefix": {
+            "type": "string",
+            "defaultValue": "dnsmarco",
+            "metadata": {
+               "description": "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
+            }
         }
     },
     "variables":{
@@ -96,6 +114,18 @@
             ]
         },
         {
+            "apiVersion": "2020-05-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('vmPublicIpAddressName')]",
+            "location": "[variables('region')]",
+            "properties": {
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+                }
+            }
+        },
+        {
             "type":"Microsoft.Network/networkInterfaces",
             "name":"[parameters('networkInterfaces_az204NIC_name')]",
             "apiVersion":"2018-10-01",
@@ -109,12 +139,12 @@
                     {
                         "name":"primary",
                         "properties":{
+                            "publicIPAddress": {
+                                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', variables('vmPublicIpAddressName'))]"
+                            },
                             "privateIPAllocationMethod":"Dynamic",
                             "subnet":{
                                 "id":"[resourceId('Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworks_az204VNET_name'),parameters('subnets_az204Subnet_name'))]"
-                            },
-                            "publicIPAddress": {
-                                "id": "[variables('vmPublicIpAddressName')]"
                             },
                             "primary":true,
                             "privateIPAddressVersion":"IPv4"
@@ -137,7 +167,8 @@
                 ]
             },
             "dependsOn":[
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworks_az204VNET_name'), parameters('subnets_az204Subnet_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworks_az204VNET_name'), parameters('subnets_az204Subnet_name'))]",
+                "[resourceId('Microsoft.Network/publicIPAddresses/', variables('vmPublicIpAddressName'))]"
             ]
         },
         {
