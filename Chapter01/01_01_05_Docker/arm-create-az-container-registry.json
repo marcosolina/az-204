@@ -2,19 +2,19 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "registries_az204marco_name": {
-            "defaultValue": "az204acrMarco",
+        "registries_name": {
+            "defaultValue": "az204demoACR",
             "type": "String"
         }
     },
-    "variables": {
-    	"region": "uksouth"
+    "variables":{
+        "region": "uksouth"
     },
     "resources": [
         {
             "type": "Microsoft.ContainerRegistry/registries",
             "apiVersion": "2020-11-01-preview",
-            "name": "[parameters('registries_az204marco_name')]",
+            "name": "[parameters('registries_name')]",
             "location": "[variables('region')]",
             "sku": {
                 "name": "Basic",
