@@ -5,7 +5,7 @@ export GROUP_NAME=AZ204-Marco-rg
 export DEPLOYMENT_NAME=AZ204-Marco-Dep
 export ARM_TEMPLATE=arm-create-az-container-registry.json
 export OVERRIDE_PROPS=overrideParameters.json
-export ACR_NAME=az204marcoacr
+export ACR_NAME=marcoacraz204
 export IMAGE_NAME=marco/bowling
 export DOCKER_FILE_FOLDER=DockerBowling
 export AZURE_ACR_REPO=marcorepo/marcobowling
@@ -33,3 +33,5 @@ az acr login --name $ACR_NAME
 
 # Pushing my image to Azure ACR
 docker push $ACR_NAME.azurecr.io/$AZURE_ACR_REPO
+
+./publishImage.sh
