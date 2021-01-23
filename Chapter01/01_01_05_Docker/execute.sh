@@ -17,9 +17,9 @@ DOCKER_IMAGE_NAME=marco/bowling
 DOCKER_FILE_FOLDER=DockerBowling
 
 # Props for Azure Container Registrer
-ACR_NAME=marcoacraz204
+ACR_NAME=az204marcoacr
 ACR_REPO_NAME=marcorepo/marcobowling
-ACR_SERVICE_PRINCIPAL_NAME=az204marco_sp
+ACR_SERVICE_PRINCIPAL_NAME=az204marco-service-principal
 ACR_IMAGE_TAG=$ACR_NAME.azurecr.io/$ACR_REPO_NAME:latest
 
 # Props for Azure Container Istance
