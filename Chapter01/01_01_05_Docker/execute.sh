@@ -88,4 +88,4 @@ $ACI_APP_DNS_NAME --ports 80
 
 GROUP_LOCATION_VAL=$(az group show --name $RESOURCE_GROUP --query location --output tsv)
 
-echo "Open: http://$ACI_APP_DNS_NAME.$GROUP_LOCATION_VAL.azurecontainer.io/$APP_CONTEXT_PATH"
+echo "Open: http://$ACI_APP_DNS_NAME.$GROUP_LOCATION_VAL.azurecontainer.io$APP_CONTEXT_PATH"
