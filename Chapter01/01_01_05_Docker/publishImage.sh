@@ -2,14 +2,7 @@
 
 # Some variable definition useful
 # for the script
-RESOURCE_GROUP=AZ204-Marco-rg
-ACR_NAME=marcoacraz204
-IMAGE_NAME=marco/bowling
-AZURE_ACR_REPO=marcorepo/marcobowling
-SERVICE_PRINCIPAL_NAME=az204marco_sp
-IMAGE_TAG=$ACR_NAME.azurecr.io/$AZURE_ACR_REPO:latest
-APP_NAME=marcobowling
-APP_DNS_NAME=marcodns
+
 
 
 
