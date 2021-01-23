@@ -7,7 +7,6 @@
   - acr_name: nome del mio registro
   - repository_name: nome del repository all'interno del mio registro (opzionale)
   - version: versione della immagine
-- Quando voglio istanziare una immagine nell' Azure Container Istance (ACI) usando le immagini del mio Azure Container Registry (ACR) devo prima authenticarmi come admin:
-  - Login nella azure shell [https://shell.azure.com](https://shell.azure.com)
-  - Copiare nella bash shell lo script "publishImage.sh"
-  - Eseguire lo script
+- Le immagini Docker vendono deployate nell' Azure Container Istance (ACI):
+  - Per il deploy mi serve un ACR Service principal
+  - Il ACR SP fa il pull e crea un container

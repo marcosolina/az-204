@@ -1,9 +1,12 @@
 {
-    "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion":"1.0.0.0",
-    "parameters":{
-        "registries_name":{
-            "value":"marcoacraz204"
-        }
-    }
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"registries_name": {
+			"value": "AZURE_CONTAINER_REGISTER_NAME"
+		},
+		"region": {
+			"value": "AZURE_REGION"
+		}
+	}
 }

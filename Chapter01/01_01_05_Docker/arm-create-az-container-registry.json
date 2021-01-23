@@ -5,6 +5,10 @@
         "registries_name": {
             "defaultValue": "az204demoACR",
             "type": "String"
+        },
+        "region": {
+        	"defaultValue": "uksouth",
+            "type": "string"
         }
     },
     "variables":{
@@ -15,7 +19,7 @@
             "type": "Microsoft.ContainerRegistry/registries",
             "apiVersion": "2020-11-01-preview",
             "name": "[parameters('registries_name')]",
-            "location": "[variables('region')]",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "Basic",
                 "tier": "Basic"
