@@ -28,6 +28,7 @@ ACI_APP_DNS_NAME=marcodns
 
 # Misc. Props.
 APP_CONTEXT_PATH=/Bowling
+APP_PORT=8080
 
 while ! [[ "$EXEC_OPTION" =~ ^(0|1)$ ]] 
 do
@@ -119,15 +120,14 @@ then
 	$ACR_IMAGE_TAG --cpu 1 --memory 1 --registry-login-server \
 	$ACR_SERVER --registry-username \
 	$SP_ID --registry-password $SP_PASS --dns-name-label \
-	$ACI_APP_DNS_NAME --ports 80
+	$ACI_APP_DNS_NAME --ports $APP_PORT
 	
-	echo "Open: http://$ACI_APP_DNS_NAME.$GROUP_LOCATION_VAL.azurecontainer.io$APP_CONTEXT_PATH"
+	echo "Open: http://$ACI_APP_DNS_NAME.$GROUP_LOCATION_VAL.azurecontainer.io:$APP_PORT$APP_CONTEXT_PATH"
 
 fi
 
 if [ $EXEC_OPTION = 1 ]
-then  
-
+then
 	# The "http://" is required by azure, do not remove it...
 	SP_ID=$(az ad sp show --id http://$ACR_SERVICE_PRINCIPAL_NAME --query appId --output tsv)
 	echo "Deleting service principal: $SP_ID"
@@ -137,7 +137,6 @@ then
 	az group delete --name $RESOURCE_GROUP --yes
 	
 	docker system prune --all --force
-
 fi
 
 echo ""
