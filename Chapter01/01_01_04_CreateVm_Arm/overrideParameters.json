@@ -3,25 +3,34 @@
     "contentVersion":"1.0.0.0",
     "parameters":{
         "virtualNetworks_az204VNET_name":{
-            "value":"az204MarcoVNET"
+            "value":"VNET_NAME"
         },
         "networkInterfaces_az204NIC_name":{
-            "value":"az204MarcoNIC"
+            "value":"NIC_NAME"
         },
         "virtualMachines_az204VMTesting_name":{
-            "value":"az204MarcoVM"
+            "value":"VM_NAME"
         },
         "subnets_az204Subnet_name":{
-            "value":"az204MarcoSubnet"
+            "value":"SUBNET_NAME"
         },
         "virtualMachines_az204VMTesting_id":{
-            "value":"[concat(parameters('virtualMachines_az204VMTesting_name'),'_OSDisk1_Marco')]"
+            "value":"[concat(parameters('virtualMachines_az204VMTesting_name'),'ODISK_NAME')]"
         },
         "virtualMachines_adminUser":{
-            "value":"marcoadminuser"
+            "value":"ADMIN_USER"
         },
         "virtualMachines_adminpassword":{
-            "value":"marcoPa$$w0rd"
+            "value":"ADMIN_PASSWORD"
+        },
+        "region":{
+            "value":"REGION_AZ_VAL"
+        },
+        "osDiskName":{
+            "value":"ODISK_NAME"
+        },
+        "vmPublicIpAddressName":{
+            "value":"PUBLIC_IP_NAME"
         }
     }
 }

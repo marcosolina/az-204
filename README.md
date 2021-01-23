@@ -36,7 +36,7 @@
 
 #### [Azure Resource Manager (ARM)](./Chapter01/01_01_04_CreateVm_Arm/)
 
-#### [Docker: Azure Container Registry (ACR)](./Chapter01/01_01_05_Docker/)
+#### [Docker: Azure Container Registry (ACR) & Azure Container Istance (ACI)](./Chapter01/01_01_05_Docker/)
 
 ## Az CLI Comandi
 

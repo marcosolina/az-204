@@ -6,7 +6,7 @@
 # life easier :)
 ######################################
 # Props. For group and resources
-RESOURCE_GROUP=AZ204-Marco-rg
+RESOURCE_GROUP=AZ204-Marco-docker-rg
 RESOURCE_GROUP_LOCATION="UK South"
 DEPLOYMENT_NAME=AZ204-Marco-Dep
 ARM_TEMPLATE=arm-create-az-container-registry.json
@@ -61,7 +61,7 @@ then
 	GROUP_LOCATION_VAL=$(az group show --name $RESOURCE_GROUP --query location --output tsv)
 
 	NEW_OVERRIDE_PROPS=tempParam.json
-	cp overrideParameters.json $NEW_OVERRIDE_PROPS
+	cp $OVERRIDE_PROPS $NEW_OVERRIDE_PROPS
 	sed -i 's/AZURE_CONTAINER_REGISTER_NAME/'"$ACR_NAME"'/' $NEW_OVERRIDE_PROPS
 	sed -i 's/AZURE_REGION/'"$GROUP_LOCATION_VAL"'/' $NEW_OVERRIDE_PROPS	
 	

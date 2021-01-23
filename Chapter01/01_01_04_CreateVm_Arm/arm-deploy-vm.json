@@ -47,19 +47,28 @@
             "metadata": {
                "description": "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
             }
+        },
+        "region":{
+            "defaultValue":"uksouth",
+            "type":"string"
+        },
+        "osDiskName":{
+            "defaultValue":"_OSDisk1",
+            "type":"string"
+        },
+        "vmPublicIpAddressName":{
+            "defaultValue":"MarcoPublicIp",
+            "type":"string"
         }
     },
     "variables":{
-        "osDiskName":"_OSDisk1",
-        "region": "uksouth",
-        "vmPublicIpAddressName": "MarcoPublicIp"
     },
     "resources":[
         {
             "type":"Microsoft.Compute/virtualMachines",
             "name":"[parameters('virtualMachines_az204VMTesting_name')]",
             "apiVersion":"2018-06-01",
-            "location":"[variables('region')]",
+            "location":"[parameters('region')]",
             "tags":{
                 
             },
@@ -77,7 +86,7 @@
                     },
                     "osDisk":{
                         "osType":"Windows",
-                        "name":"[concat(parameters('virtualMachines_az204VMTesting_name'),variables('osDiskName'))]",
+                        "name":"[concat(parameters('virtualMachines_az204VMTesting_name'),parameters('osDiskName'))]",
                         "createOption":"FromImage",
                         "caching":"ReadWrite"
                     },
@@ -116,8 +125,8 @@
         {
             "apiVersion": "2020-05-01",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[variables('vmPublicIpAddressName')]",
-            "location": "[variables('region')]",
+            "name": "[parameters('vmPublicIpAddressName')]",
+            "location": "[parameters('region')]",
             "properties": {
                 "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
                 "dnsSettings": {
@@ -129,7 +138,7 @@
             "type":"Microsoft.Network/networkInterfaces",
             "name":"[parameters('networkInterfaces_az204NIC_name')]",
             "apiVersion":"2018-10-01",
-            "location":"[variables('region')]",
+            "location":"[parameters('region')]",
             "tags":{
                 
             },
@@ -140,7 +149,7 @@
                         "name":"primary",
                         "properties":{
                             "publicIPAddress": {
-                                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', variables('vmPublicIpAddressName'))]"
+                                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('vmPublicIpAddressName'))]"
                             },
                             "privateIPAllocationMethod":"Dynamic",
                             "subnet":{
@@ -168,14 +177,14 @@
             },
             "dependsOn":[
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworks_az204VNET_name'), parameters('subnets_az204Subnet_name'))]",
-                "[resourceId('Microsoft.Network/publicIPAddresses/', variables('vmPublicIpAddressName'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('vmPublicIpAddressName'))]"
             ]
         },
         {
             "type":"Microsoft.Network/virtualNetworks",
             "name":"[parameters('virtualNetworks_az204VNET_name')]",
             "apiVersion":"2018-10-01",
-            "location":"[variables('region')]",
+            "location":"[parameters('region')]",
             "tags":{
                 
             },
