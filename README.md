@@ -30,7 +30,7 @@
 - [Azure Resource Manager (ARM)](./Chapter01/01_01_03_CreateVm_Arm/)
 - [Docker: Azure Container Registry (ACR) & Azure Container Istance (ACI)](./Chapter01/01_01_05_Docker/)
 - [Azure App Service - Azure App Service Plan](./Chapter01/01_02_01_Azure_App_Service_webapp/)
-- [Enable diagnostics logging](./Chapter01/01_02_02_diagnostic_logging/)
+- [Enable diagnostics logging](./Chapter01/01_02_02_diagnostics_logging)
 
 ## Az CLI Comandi
 
