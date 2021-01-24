@@ -9,36 +9,28 @@
     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     ```
 
-## Capitolo 1
+  - Remove Windows Characters from Bash scropt
 
-### Develop Azure Infrastructure as a service compute solution
+    ```bash
+    sed -i -e 's/\r$//' SCRIPT_NAME
+    ```
+
+## Capitolo 1 - Develop Azure Infrastructure as a service compute solution
+
+### Introduzione
 
 - Quando sviluppi una applicazione nel cloud, di solito crei o una IaaS oppure una PaaS
   - IaaS Infrastructure as a service: più granulare, ed hai più controllo, ma devi mantenere la infrastruttura a mano
   - PaaS Platform as a service: tu pensi solo alla tua applicazione
 - Con IaaS di solito devi creare una VM
 
-#### Provision a VM
+#### Sezioni
 
-- Quando creo un VM posso scegliere diverse configurazioni hardware.
-- Ogni subscription ha un limite max di 20 VM per regione. Se me ne servono di più devo contattare l&#39;Azure support Service
-- Le VM extensions mi permettono di automatizzare delle attivtà dopo il deploy della VM. Per esempio eseguire degli scripts, deploy di configurazione o acquisire dati diagnostici
-- Il deploy della VM lo posso fare in divesi modi:
-  - Azure Portal
-  - Powershell
-  - Azure CLI
-  - REST API or C#
-- Se la VM usa un load balancer è meglio metterla in un &quot;availability set&quot;. Questo mi garantisce the le VM che ospitano la mia app non stanno tutte sullo stesso hardware
-- Per accedere ad una VM da remoto mi server:
-  - Public IP (Statico o dinamico)
-  - Network security group
-  - Security rule
-
-#### [Azure Resource Manager (ARM)](./Chapter01/01_01_03_CreateVm_Arm/)
-
-#### [Docker: Azure Container Registry (ACR) & Azure Container Istance (ACI)](./Chapter01/01_01_05_Docker/)
-
-#### [Azure App Service - Azure App Service Plan](./Chapter01/01_02_01_Azure_App_Service_webapp/)
+- [Provision VMs](./Chapter01/01_01_01_Provision_Vm/)
+- [Azure Resource Manager (ARM)](./Chapter01/01_01_03_CreateVm_Arm/)
+- [Docker: Azure Container Registry (ACR) & Azure Container Istance (ACI)](./Chapter01/01_01_05_Docker/)
+- [Azure App Service - Azure App Service Plan](./Chapter01/01_02_01_Azure_App_Service_webapp/)
+- [Enable diagnostics logging](./Chapter01/01_02_02_diagnostic_logging/)
 
 ## Az CLI Comandi
 

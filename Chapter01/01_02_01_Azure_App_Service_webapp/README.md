@@ -18,4 +18,3 @@
   - Se la mia Web App richiede accesso a risorse nella mia infrastruttura locale (Ufficio o casa), l'App Service fornisce due metodi:
     - **Vnet integration**: Disponibile solo per pacchetti Standard, Premium o Premium V2. Permette alla tua Web App ti accedere alle risorse nella tua VPN
     - **Hybrid connections**: Questa opzione dipende dall'Azure Service Bus Relay e crea una connessione di rete tra l'App Service e l'end point dell'applicazione. Significa che abilita traffico TCP tra uno specifico HOST e combinazione di porte
-- 
