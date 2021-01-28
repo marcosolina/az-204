@@ -19,6 +19,8 @@ APP_SERVICE_PLAN_SKU_SIZE=B1
 APP_SERVICE_PLAN_WORKER_SIZE_ID=0
 APP_SERVICE_PLAN_STACK=dotnetcore
 
+../../Misc/Scripts/selectSubscription.sh
+
 while ! [[ "$EXEC_OPTION" =~ ^(0|1)$ ]] 
 do
   echo ""

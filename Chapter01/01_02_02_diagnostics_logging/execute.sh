@@ -1,6 +1,8 @@
 #!/bin/bash
 #Azure CLI template deployment
 
+../../Misc/Scripts/selectSubscription.sh
+
 while ! [[ "$EXEC_OPTION" =~ ^(0|1)$ ]] 
 do
   echo ""
