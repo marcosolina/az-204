@@ -30,6 +30,9 @@ ACI_APP_DNS_NAME=marcodns
 APP_CONTEXT_PATH=/Bowling
 APP_PORT=8080
 
+
+../../Misc/Scripts/selectSubscription.sh
+
 while ! [[ "$EXEC_OPTION" =~ ^(0|1)$ ]] 
 do
   echo ""

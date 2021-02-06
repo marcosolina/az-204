@@ -20,6 +20,8 @@ PUBLIC_IP_NAME=MarcoIpPublic
 # This Resource Group is automatically created...
 GROUP_NETWORK_WATCHERNAME=NetworkWatcherRG
 
+../../Misc/Scripts/selectSubscription.sh
+
 while ! [[ "$EXEC_OPTION" =~ ^(0|1)$ ]] 
 do
   echo ""
