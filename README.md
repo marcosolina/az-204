@@ -32,6 +32,7 @@
 - [Azure App Service - Azure App Service Plan](./Chapter01/01_02_01_Azure_App_Service_webapp/)
 - [Enable diagnostics logging](./Chapter01/01_02_02_diagnostic_logging/)
 - [Deploy code to a web app](./Chapter01/01_02_03_deploy_code_webapp/)
+- [Implement Azure Functions](./Chapter01/01_03_01_Implement_Azure_Functions/)
 
 ## Az CLI Comandi
 

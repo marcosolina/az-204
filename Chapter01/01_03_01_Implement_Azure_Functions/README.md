@@ -1,0 +1,21 @@
+# Implement Azure Functions
+
+- Le Azure Functions sono basate sull'Azure App Service
+- Con le function paghi solo se il codice sta girando, a differenza App Service che paghi anche se non girano
+- Siccome le functions si basano sull'app service, può scegliere di farle giare all'interno di un app service plan esistente.
+- Il modo in cui dichiaro i bindings dipende dal linguaggio:
+  - C#: decoro i metodi
+  - Altri: modifico il file di configurazione function.json definendo:
+    - **type**: Stringa che rappresenta il tipo do binding
+    - **direction**: input, output o inout bindings
+    - **name**: La function usa questo attributo per associare i dati nella funzione. Per esempio in Javascript, la chiave in un key-value list
+- Per poter usare un binding lo devo prima registrare. In C# lo faccio isntallando un NuGet, per gli altri installo un pacchetto usando una utility CLI
+- Ci sono tre modi per configurare i trigger:
+  - **data operation**: Inviato quando dei dati sono creati, modificati o aggiunti al sistema. Code supoprtate: CosmosDB, Event Grid, Event Hub, Blob Storage, Queue Storage e Service Bus
+  - **timers**: esecuzioni programmate
+  - **webhooks**: HTTP request
+- Quando uso trigger di tipo "Timer" e "Webhook" non devo installare l'extension package
+- HTTP function, possono essere protette con delle keys:
+  - **host**: queste chiavi sono condivise tra tutte le funzioni
+  - **function**: queste chiavi proteggono la singola funzione
+- Le funzioni quando girano hanno dei limiti, tipo lunghezza della request, lunghezza URL, tempo di esecuzione.
