@@ -19,3 +19,16 @@
   - **host**: queste chiavi sono condivise tra tutte le funzioni
   - **function**: queste chiavi proteggono la singola funzione
 - Le funzioni quando girano hanno dei limiti, tipo lunghezza della request, lunghezza URL, tempo di esecuzione.
+
+## Durable functions
+
+- Le function sono stateless, le durable functions sono una estensione delle functions che forniscono uno stateful workflow in un ambiente serveless
+- **Cosa posso fare**:
+  - chiamare altre funzioni mantenendo lo stato tra le chiamate (sincrone e non)
+  - Definire il workflow via codice, non via JSON
+  - Essere sicuro che lo stato sia consistente
+- Ci sono diversi tipi di durable functions
+  - Activity: eseguono il lavoro
+  - Orchetrator: chiamano le activity quando e nell'ordine necessario
+  - Client: L'entry point. Il trigger può essere HTTP, queue event etc
+- Le durable aggiungono due trigger in più. Orchestration trigger e Activity trigger
