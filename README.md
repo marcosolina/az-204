@@ -34,6 +34,12 @@
 - [Deploy code to a web app](./Chapter01/01_02_03_deploy_code_webapp/)
 - [Implement Azure Functions](./Chapter01/01_03_01_Implement_Azure_Functions/)
 
+## Capitolo 2 - Develop for Azure Storage
+
+#### Sezioni
+
+- [Cosmos DB storate](./Chapter02/02_01_cosmos_db_storage/)
+
 ## Az CLI Comandi
 
 | Comando | Descrizione |
