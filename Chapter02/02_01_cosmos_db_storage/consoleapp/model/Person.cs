@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace consoleapp
+namespace consoleapp.model
 {
     public class Person
     {

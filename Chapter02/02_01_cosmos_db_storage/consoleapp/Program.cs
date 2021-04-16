@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Microsoft.Azure.Cosmos;
 using System.Threading.Tasks;
+using consoleapp.model;
 
 namespace consoleapp
 {
