@@ -38,7 +38,7 @@
 
 #### Sezioni
 
-- [Cosmos DB storate](./Chapter02/02_01_cosmos_db_storage/)
+- [Cosmos DB storage](./Chapter02/02_01_cosmos_db_storage/)
 
 ## Az CLI Comandi
 
