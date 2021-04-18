@@ -12,11 +12,12 @@ DB_NAME=az204marcodb
 
 ../../Misc/Scripts/selectSubscription.sh
 
-while ! [[ "$EXEC_OPTION" =~ ^(0|1)$ ]] 
+while ! [[ "$EXEC_OPTION" =~ ^(0|1|2)$ ]] 
 do
   echo ""
-  echo "0) Deploy"
-  echo "1) Delete"
+  echo "0) Deploy StandardAPI"
+  echo "1) Deploy MongoAPI"
+  echo "2) Delete"
   echo ""
   read -p "Choose one option: " EXEC_OPTION
   echo ""
@@ -24,7 +25,12 @@ done
  
 echo "You choose $EXEC_OPTION"
 
-if [ $EXEC_OPTION = 0 ]
+
+if [ $EXEC_OPTION = 1 ]
+then  
+    ARM_TEMPLATE=arm-cosmosdb-mongoapi.json
+fi
+if [ $EXEC_OPTION = 0 ] || [ $EXEC_OPTION = 1 ]
 then  
 	######################################
 	# Createing the resource group
@@ -61,7 +67,7 @@ then
 	
 fi
 
-if [ $EXEC_OPTION = 1 ]
+if [ $EXEC_OPTION = 2 ]
 then
 	az group delete --name $RESOURCE_GROUP --yes
 fi

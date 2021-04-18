@@ -18,3 +18,15 @@
   - **Physical** Queste partizioni sono un gruppo di repliche dei tuoi dati che sono fisicamente salvate sul server. Azure gestisce in modo automatico questi gruppi. Una partizione fisica può contenere una o più partizioni logiche.
 - Di default ogni partizione logica ha un limite di 20GB
 - Se necessario posso creare "synthetic partion key", sarebbe la concatenazione di due proprietà concatenate
+- Cosmos mi permette di scegliere tra 5 tipi di "consistency blade" per gestire la rindondanza
+  - **Strong**: le operazioni di lettura sono garantite, ritorneranno il dato più recente. Contro: alta latenza
+  - **Bounded Staleness**: Si configura un lag predefinito per le read, le più X recenti dopo una wrote o aspettin un T dopo una write
+  - **Session**: Scope legato alla sessione del client, miglior bilancio tra consistenza e performance, indicato per applicazione che fanno w/r nella stessa sessione
+  - **Consistent Prefix**: Garantisce che leggi i dati nell'ordine in cui sono stati scritti, ma non garantisce che leggi tutti i dati
+  - **Eventual** Non garantisce che ricevi i dati in ordine
+- **Containers**
+  - Quando creo un nuovo container posso configurare:
+    - **IndexingPolicy** Di default tutte le proprietà sono indicizzate, ma io posso cambiare questo
+    - **TimeToLive (TTL)**: cancellare automaticamente il documento dopo T secondi, si può configurare a container level o document level
+    - **ChangeFeedPolicy**: Puoi leggere le modifiche effettuate ad un elemento in un container. Per esempio trigger una funzione quando un documento viene modificato
+    - **UniqueKeyPolicy** si possono creare solo quando creo il container
