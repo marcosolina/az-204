@@ -39,6 +39,7 @@
 #### Sezioni
 
 - [Cosmos DB storage](./Chapter02/02_01_cosmos_db_storage/)
+- [Blob storage](./Chapter02/02_02_blob_storage/)
 
 ## Az CLI Comandi
 
