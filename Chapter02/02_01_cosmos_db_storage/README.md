@@ -30,3 +30,7 @@
     - **TimeToLive (TTL)**: cancellare automaticamente il documento dopo T secondi, si può configurare a container level o document level
     - **ChangeFeedPolicy**: Puoi leggere le modifiche effettuate ad un elemento in un container. Per esempio trigger una funzione quando un documento viene modificato
     - **UniqueKeyPolicy** si possono creare solo quando creo il container
+- Stored Procedure e trigger:
+  - Sono definite a livello di container, quindi se mi servono in container diversi le devo copiare
+  - Il loro scope è "partition key". Vedono solo gli element nella stessa partizione dell'elemento che ha lanciato il trigger
+  - I trigger possono essere pre o post. I pre trigger non hanno input parameters, 
