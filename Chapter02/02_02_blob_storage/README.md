@@ -16,3 +16,19 @@
   - **Expired**: Il lease è scaduto, puoi acquisirlo, rinnovarlo, rilasciarlo o romperlo
   - **Breaking**: Hai rotto il lease, ma continua ad essere loccato fino a quando il periodo di "break" scade. In questo stato puoi rilasciare o romprere il lease
   - **Broken**: Il periodo di break è scaduto ed il lease è stato rotto. In questo stato puoi acquisire, rilasciare e rompere il lease. Il break lo fai quando è successo qualcosa che ha impedito il corretto rilascio. Tipo problema di rete, do ci sono lease orfani che vuoi rimuore
+- Performance: Azure blob storage fornisce diversi livelli di accesso dati, questi livelli forniscono prestazioni differenti (e costi)
+  - **Hot**: Questo è il livello per i dati che uso frequentemente, è il livello di default usato nella creazione di un nuovo Azure Storage Account
+  - **Cool**: Da usare quando uso i dati meno frequentemente e de vo tenerli per almeno 30 gionri
+  - **Archive** Da usare per dati che sono usati raramente e devo essere salvati per almeno 180 giorni. Questo livello è disponibile per blob, non posso configurarlo per lo Storage Account
+- Prezzi/Performance:
+  - **Cool**: un pò più lento per via del costo più basso, ma l'accesso costa di più
+  - **Hot & Cool**: hanno caratteristiche simili in termine di tempi di accesso e throughput
+  - **Archive**: è uno storage offline, è lo storage più economico ma le operazioni hanno il prezzo più alto
+  - Più il prezzo dello spazio è basso, più il prezzo delle operazioni cresce
+  - Posso scegliere i "livelli" solo quando creato Azure Storage Accounts di tipo General Purpose v2 (GPv2)
+- Quando sposto i dati pago le operazioni read o write sul livello più "caro" in termini di operazioni
+- Quando muovo blob dal livello "Archive", ci potrebbe volere fino a 15 ore. Questo perchè Archive è offline, i dati devono essere messi prima in "online status"
+- Posso creare delle policy per muovere in automatico i blob. Sono scritte in JSON e definiscono le regole da applicare ai containers o blob type, ogni regola ha degli "action set":
+  - **Filter Set**: limita le azioni ad un gruppo di elementi che soddisfano i criteri del filtro
+  - **Action Set**: Usato per definire le azioni da eseguire sugli elementi che soddisfano il "Filter Set"
+- 
