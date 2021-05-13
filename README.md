@@ -41,6 +41,13 @@
 - [Cosmos DB storage](./Chapter02/02_01_cosmos_db_storage/)
 - [Blob storage](./Chapter02/02_02_blob_storage/)
 
+## Capitolo 3 - Impelment Azure security
+
+#### Sezioni
+
+- [Implement user authentication and authorisation](./Chapter03/03_01_authentication_authorisation/)
+- [Implement secure cloud solutions](./Chapter03/03_02_secure_cloud_solutions/)
+
 ## Az CLI Comandi
 
 | Comando | Descrizione |
