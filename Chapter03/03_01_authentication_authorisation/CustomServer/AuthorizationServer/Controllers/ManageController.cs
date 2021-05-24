@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AuthorizationServer.Models;
+using AuthorizationServer.Constants;
+using DotNetOpenAuth.OAuth2;
+using System.Net.Http;
 
 namespace AuthorizationServer.Controllers
 {
@@ -15,6 +18,7 @@ namespace AuthorizationServer.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private WebServerClient _webServerClient;
 
         public ManageController()
         {
@@ -54,14 +58,12 @@ namespace AuthorizationServer.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+            ViewBag.StatusMessage = message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed." 
+                                    : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                                    : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+                                    : message == ManageMessageId.Error ? "An error has occurred."
+                                    : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+                                    : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed." : "";
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
@@ -72,7 +74,64 @@ namespace AuthorizationServer.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+            ViewBag.AccessToken = Request.Form["AccessToken"] ?? "";
+            ViewBag.RefreshToken = Request.Form["RefreshToken"] ?? "";
+            ViewBag.Action = "";
+            ViewBag.ApiResponse = "";
+            InitializeWebServerClient();
+            var accessToken = Request.Form["AccessToken"];
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                var authorizationState = _webServerClient.ProcessUserAuthorization(Request);
+                if (authorizationState != null)
+                {
+                    ViewBag.AccessToken = authorizationState.AccessToken;
+                    ViewBag.RefreshToken = authorizationState.RefreshToken;
+                    ViewBag.Action = Request.Path;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(Request.Form.Get("submit.Authorize")))
+            {
+                var userAuthorization = _webServerClient.PrepareRequestUserAuthorization( new[] { "bio", "notes" });
+                userAuthorization.Send(HttpContext);
+                Response.End();
+            }
+            else if (!string.IsNullOrEmpty(Request.Form.Get("submit.Refresh")))
+            {
+                var state = new AuthorizationState
+                {
+                    AccessToken = Request.Form["AccessToken"],
+                    RefreshToken = Request.Form["RefreshToken"]
+                };
+                if (_webServerClient.RefreshAuthorization(state))
+                {
+                    ViewBag.AccessToken = state.AccessToken;
+                    ViewBag.RefreshToken = state.RefreshToken;
+                }
+            }
+            else if (!string.IsNullOrEmpty(Request.Form.Get("submit.CallApi")))
+            {
+                var resourceServerUri = new
+                Uri(Paths.ResourceServerBaseAddress);
+                var client = new
+                HttpClient(_webServerClient.CreateAuthorizingHandler(accessToken));
+                var body = client.GetStringAsync(new Uri(resourceServerUri, Paths.MePath)).Result;
+                ViewBag.ApiResponse = body;
+            }
             return View(model);
+        }
+
+        private void InitializeWebServerClient()
+        {
+            var authorizationServerUri = new Uri(Paths.AuthorizationServerBaseAddress);
+            var authorizationServer = new AuthorizationServerDescription
+            {
+                AuthorizationEndpoint = new Uri(authorizationServerUri, Paths.AuthorizePath),
+                TokenEndpoint = new Uri(authorizationServerUri, Paths.TokenPath)
+            };
+            _webServerClient = new WebServerClient(authorizationServer, Clients.Client1.Id, Clients.Client1.Secret);
         }
 
         //

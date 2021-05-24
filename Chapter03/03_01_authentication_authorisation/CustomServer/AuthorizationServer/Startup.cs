@@ -9,6 +9,7 @@ namespace AuthorizationServer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ConfigureWebApi(app);
         }
     }
 }
