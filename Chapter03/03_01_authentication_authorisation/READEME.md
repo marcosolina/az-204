@@ -19,4 +19,8 @@
   - **User delegation SAS**: si applica solo a Blob Storage, usi un AZ AD user account per proteggere il SAS token
   - **Account SAS**: contolla l'accesso all'intero Storage Account. Devi usare lo storage account key per questo tipo di SAS
   - **Service SAS**: Delega l'accesso a specifici servizi all'interno dello Storage Account. Devi usare lo storage account key per questo tipo di SAS
-
+- Negli esercizi per impostare diversi livelli di sicurezza, dovevo sempre condividere un link per dare accesso allo storage. Condividere un link non è il massimo in termini di sicurezza. Per migliorare quest aspetto esistono le "Stored Access Policy", le quali sono definite e salvate con la tabella che vuoi proteggere.
+- Quando definisco una policy, le do un ID, che dovrà poi essere usatp quando genero il token SAS (l'ID diventa parte del token SAS)
+- I vantaggi sono che posso controllare la validatà e scadenza delle policy senza modificare il SAS token. Il SAS token normale ha una sfilza di query param nell'URL. Qui ho l'ID, e la definizione è nelle policy
+- Posso associare fino a 5 policy
+- 
