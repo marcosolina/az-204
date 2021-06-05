@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appconfig_name": {
+            "defaultValue": "marcoappconfig",
+            "type": "string"
+        },
+        "location": {
+            "defaultValue": "uksouth",
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.AppConfiguration/configurationStores",
+            "apiVersion": "2021-03-01-preview",
+            "name": "[parameters('appconfig_name')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "free"
+            },
+            "properties": {
+                "encryption": {},
+                "disableLocalAuth": false
+            }
+        }
+    ]
+}

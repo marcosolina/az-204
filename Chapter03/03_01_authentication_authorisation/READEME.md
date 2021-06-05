@@ -23,4 +23,31 @@
 - Quando definisco una policy, le do un ID, che dovrà poi essere usatp quando genero il token SAS (l'ID diventa parte del token SAS)
 - I vantaggi sono che posso controllare la validatà e scadenza delle policy senza modificare il SAS token. Il SAS token normale ha una sfilza di query param nell'URL. Qui ho l'ID, e la definizione è nelle policy
 - Posso associare fino a 5 policy
-- 
+
+## Azure Active Directory
+
+- Punti da considerare quando registro la mia app:
+  - **Supported account types**: Devo considerare se gli utenti della app saranno:
+    - **Users from your organization only** Ogni persona che ha un account nel mio tenant potra usare l'app
+    - **Users from any organization** Usare questa opzione quando voglio che qualsiasi utente con un AD account, professional o educationl, possa fare la log in nella mia app
+    - **Users from any organization or Microsoft accounts** usa questa opzione se vuoi che ogni professional, educational o chiunque abbia un Microsoft account possa accedere alla app
+- **Platform** L'OAuth2 non è solo limitato ad applicazioni web, puoi usarlo anche per piattaforme mobile, iOS, Android o desktop, macOS, Console, IoT Windows, UWP
+
+## RBAC
+
+Role-based access controls (RBAC).
+Concetti:
+
+- **Security principal**: L'entità che richiede i permessi per compiere una azione. Un sec principal può essere uno di questi:
+  - **User**: un individuo che ha un profilo in Azure AD tenant
+  - **Group**: Un grouppo di utenti
+  - **Service Principal**: Simile all'"Utente" per una applicazione. Il SP rappresenta una applicazione all'interno del tenant
+  - **Managed identity**: Questo tipo di identità rappresenta le app cloud che hanno bisogno di accedere al mio AD Tenant. Azure gestisce automaticamente queste identità
+- **Permission**: Le azioni che puoi fare con una risorsa. Es: richedere una delegation key per creare un SAS token, elencare il contenuto di un container etc. Non puoi assegnare una permission ad un SP, devi usare una role o role definition
+- **Role Definition**: Nota come semplicemente "Role", è un gruppo di permissions. Tu assegni una role as un SP. Ci sono molte role predefinite che posso usare per gestire le risorse, ce ne sono 4 fondamentali:
+  - **Owner**: Da accesso completo a tutte le risorse in scope
+  - **Contributor**: Da accesso in modifica a tutte le risorse, puoi fare tutte le modifiche, inclusa la delete delle risorse in scope. Non puoi assegnare role ad altri SP
+  - **Reader**: Accesso in sola lettura a tutte le risorse in scope
+  - **User Access Administrator**: Utile solo per getire gli accessi degli utenti alle risorse Azure
+- **Scope**: Il gruppo di risorse dove assegno le role. 4 livelli: management group (gruppo di subscriptions), subscription, resource group, resource, Questi livelli sono organizzati in parent/child, con MG al top e R in basso.
+- **Role assignement**: Questo è la ginzione tra i pezzi differenti del RBAC. Una role assignment si connette all'SP con una role ed uno scope 
