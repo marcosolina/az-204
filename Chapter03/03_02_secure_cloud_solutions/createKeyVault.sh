@@ -73,6 +73,7 @@ fi
 if [ $EXEC_OPTION = 1 ]
 then
 	az group delete --name $RESOURCE_GROUP --yes
+    az keyvault purge --name $KEYVAULT_NAME
 fi
 
 echo ""
