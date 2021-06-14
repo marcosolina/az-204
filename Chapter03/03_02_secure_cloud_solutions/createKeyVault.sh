@@ -5,7 +5,7 @@ RESOURCE_GROUP=AZ204-Marco-keyvault-rg
 RESOURCE_GROUP_LOCATION="UK South"
 DEPLOYMENT_NAME=AZ204-Marco-Dep
 ARM_TEMPLATE=arm-keyvault.json
-OVERRIDE_PROPS=keyvault-params.json
+OVERRIDE_PROPS=keyvault-params-simple.json
 
 # Props to override
 KEYVAULT_NAME=az204marcokv
@@ -27,13 +27,6 @@ echo "You choose $EXEC_OPTION"
 if [ $EXEC_OPTION = 0 ]
 then  
 
-	az webapp list --output table
-    read -p "Type the Webapp name: " WEB_APP_NAME
-	read -p "Type the WebApp resource group: " WEB_APP_RG
-
-	WEBAPP_PRINCIPAL_ID=$(az webapp identity show --name $WEB_APP_NAME --resource-group $WEB_APP_RG --query principalId --output tsv)
-
-
 	######################################
 	# Createing the resource group
 	######################################
@@ -52,7 +45,30 @@ then
 	cp $OVERRIDE_PROPS $NEW_OVERRIDE_PROPS
 	sed -i 's/KEYVAULT_NAME/'"$KEYVAULT_NAME"'/' $NEW_OVERRIDE_PROPS
 	sed -i 's/LOCATION/'"$REGION_AZ_VAL"'/' $NEW_OVERRIDE_PROPS
-	sed -i 's/WEBAPP_PRINCIPAL_ID/'"$WEBAPP_PRINCIPAL_ID"'/' $NEW_OVERRIDE_PROPS
+
+	while ! [[ "$WEB_APP_REG" =~ ^(0|1)$ ]] 
+	do
+	echo ""
+	echo "0) Register Web APP"
+	echo "1) Do NOT register Web APP"
+	echo ""
+	read -p "Choose one option: " WEB_APP_REG
+	echo ""
+	done
+
+	if [ $WEB_APP_REG = 0 ]
+	then
+		OVERRIDE_PROPS=keyvault-params.json
+		cp $OVERRIDE_PROPS $NEW_OVERRIDE_PROPS
+		sed -i 's/KEYVAULT_NAME/'"$KEYVAULT_NAME"'/' $NEW_OVERRIDE_PROPS
+		sed -i 's/LOCATION/'"$REGION_AZ_VAL"'/' $NEW_OVERRIDE_PROPS
+		az webapp list --output table
+		read -p "Type the Webapp name: " WEB_APP_NAME
+		read -p "Type the WebApp resource group: " WEB_APP_RG
+
+		WEBAPP_PRINCIPAL_ID=$(az webapp identity show --name $WEB_APP_NAME --resource-group $WEB_APP_RG --query principalId --output tsv)
+		sed -i 's/WEBAPP_PRINCIPAL_ID/'"$WEBAPP_PRINCIPAL_ID"'/' $NEW_OVERRIDE_PROPS
+	fi
 	
 	######################################
 	# Createing the resource in the
