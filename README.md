@@ -48,6 +48,16 @@
 - [Implement user authentication and authorisation](./Chapter03/03_01_authentication_authorisation/)
 - [Implement secure cloud solutions](./Chapter03/03_02_secure_cloud_solutions/)
 
+## Capitolo 4 - Monitor, troubleshooting, and optimize Azure solutions
+
+#### Sezioni
+
+- [Integrate caching and content delivery within solution](./Chapter04/04_01_integrate_caching_and_content_delivery/)
+  - Not able to complete exercise 1:
+    - ![No access](./Chapter04/04_01_integrate_caching_and_content_delivery/cdnIssue1.png)
+    - ![No access](./Chapter04/04_01_integrate_caching_and_content_delivery/cdnIssue1.png)
+- [Instruments solutions to support monitoring and loggin](./Chapter04/04_02_monitor_and_logging/)
+
 ## Az CLI Comandi
 
 | Comando | Descrizione |

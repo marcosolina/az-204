@@ -1,0 +1,145 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the frontdoor resource."
+            }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of the frontdoor resource."
+            }
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2020-05-01",
+            "type": "Microsoft.Network/frontdoors",
+            "name": "[parameters('resourceName')]",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "properties": {
+                "frontdoorId": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1",
+                "friendlyName": "az204marco1",
+                "enabledState": "Enabled",
+                "healthProbeSettings": [
+                    {
+                        "name": "healthProbeSettings-1623658678246",
+                        "properties": {
+                            "path": "/",
+                            "protocol": "Https",
+                            "intervalInSeconds": 30,
+                            "healthProbeMethod": "Head",
+                            "enabledState": "Enabled"
+                        },
+                        "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/healthProbeSettings/healthProbeSettings-1623658678246"
+                    }
+                ],
+                "loadBalancingSettings": [
+                    {
+                        "name": "loadBalancingSettings-1623658678246",
+                        "properties": {
+                            "sampleSize": 4,
+                            "successfulSamplesRequired": 2,
+                            "additionalLatencyMilliseconds": 0
+                        },
+                        "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/loadBalancingSettings/loadBalancingSettings-1623658678246"
+                    }
+                ],
+                "frontendEndpoints": [
+                    {
+                        "name": "az204marco1-azurefd-net",
+                        "properties": {
+                            "hostName": "az204marco1.azurefd.net",
+                            "sessionAffinityEnabledState": "Disabled",
+                            "sessionAffinityTtlSeconds": 0,
+                            "webApplicationFirewallPolicyLink": null,
+                            "customHttpsConfiguration": null
+                        },
+                        "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/frontendEndpoints/az204marco1-azurefd-net"
+                    }
+                ],
+                "backendPools": [
+                    {
+                        "name": "MyPool",
+                        "properties": {
+                            "backends": [
+                                {
+                                    "address": "c010201webapp.azurewebsites.net",
+                                    "privateLinkResourceId": null,
+                                    "privateLinkLocation": null,
+                                    "privateEndpointStatus": null,
+                                    "privateLinkApprovalMessage": null,
+                                    "enabledState": "Enabled",
+                                    "httpPort": 80,
+                                    "httpsPort": 443,
+                                    "priority": 1,
+                                    "weight": 50,
+                                    "backendHostHeader": "c010201webapp.azurewebsites.net"
+                                },
+                                {
+                                    "address": "c0401webapp.azurewebsites.net",
+                                    "privateLinkResourceId": null,
+                                    "privateLinkLocation": null,
+                                    "privateEndpointStatus": null,
+                                    "privateLinkApprovalMessage": null,
+                                    "enabledState": "Enabled",
+                                    "httpPort": 80,
+                                    "httpsPort": 443,
+                                    "priority": 1,
+                                    "weight": 50,
+                                    "backendHostHeader": "c0401webapp.azurewebsites.net"
+                                }
+                            ],
+                            "loadBalancingSettings": {
+                                "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/loadBalancingSettings/loadBalancingSettings-1623658678246"
+                            },
+                            "healthProbeSettings": {
+                                "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/healthProbeSettings/healthProbeSettings-1623658678246"
+                            }
+                        },
+                        "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/backendPools/MyPool"
+                    }
+                ],
+                "routingRules": [
+                    {
+                        "name": "LocationRule",
+                        "properties": {
+                            "frontendEndpoints": [
+                                {
+                                    "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/frontendEndpoints/az204marco1-azurefd-net"
+                                }
+                            ],
+                            "acceptedProtocols": [
+                                "Http",
+                                "Https"
+                            ],
+                            "patternsToMatch": [
+                                "/*"
+                            ],
+                            "enabledState": "Enabled",
+                            "routeConfiguration": {
+                                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                                "customForwardingPath": null,
+                                "forwardingProtocol": "HttpsOnly",
+                                "backendPool": {
+                                    "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/backendPools/MyPool"
+                                },
+                                "cacheConfiguration": null
+                            }
+                        },
+                        "id": "/subscriptions/1d43bb40-7d39-4657-a149-1a70350f9f07/resourceGroups/az204-marco-frontdoor-rg/providers/Microsoft.Network/frontdoors/az204marco1/routingRules/LocationRule"
+                    }
+                ],
+                "backendPoolsSettings": {
+                    "enforceCertificateNameCheck": "Enabled",
+                    "sendRecvTimeoutSeconds": 30
+                }
+            }
+        }
+    ]
+}
