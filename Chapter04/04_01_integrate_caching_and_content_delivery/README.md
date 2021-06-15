@@ -46,3 +46,11 @@
 
 - Questo servizio ti permette di "route" il traffico in modo efficiente alla posizione più vicina all'utente e ti permette di cachare i contenuti fornendo un CDN
 - Come in Azure CDN puoi configuare la cache e il TTL degli elementi
+
+## Redis
+
+- Tre prezzi:
+  - Basic: Basso throughput e alta latenza. Da usare soro per la fase di sviluppo. Non c'è un Service Level Agreement (SLA)
+  - Standard: Offre due nodi, primario e secondario. Il SLA ha una disponibilità del 99.9%
+  - Premium: Enterprise Redis cluster gestito da Microsod. Fornisce tutte le funzioni per high throughput e bassa latenza, deployato su hardware potente. SLA 99.9%
+-
