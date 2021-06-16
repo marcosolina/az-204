@@ -1,0 +1,37 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "app-insight-name": {
+      "type": "string"
+    },
+    "app-insight-location": {
+      "type": "string"
+    },
+    "app-insight-type": {
+      "type": "string"
+    },
+    "app-insight-hockeyAppToken": {
+      "type": "string"
+    },
+    "app-insight-requestSource": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "location": "[parameters('app-insight-location')]",
+      "name": "[parameters('app-insight-name')]",
+      "type": "microsoft.insights/components",
+      "apiVersion": "2014-08-01",
+      "properties": {
+        "ApplicationId": "[parameters('app-insight-name')]",
+        "Application_Type": "[parameters('app-insight-type')]",
+        "HockeyAppToken": "[parameters('app-insight-hockeyAppToken')]",
+        "HockeyAppId": "[parameters('app-insight-hockeyAppToken')]",
+        "Flow_Type": "Redfield",
+        "Request_Source": "[parameters('app-insight-requestSource')]"
+      }
+    }
+  ]
+}
