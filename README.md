@@ -58,6 +58,15 @@
     - ![No access](./Chapter04/04_01_integrate_caching_and_content_delivery/cdnIssue1.png)
 - [Instruments solutions to support monitoring and loggin](./Chapter04/04_02_monitor_and_logging/)
 
+## Capitolo 5 - Connect to and consume Azure services and thirdparty services
+
+#### Sezioni
+
+- [Develop an App Service Logic App](./Chapter05/05_01_develop_logic_app/)
+- [Implement API Management](./Chapter05/05_02_apim/)
+- [Develop event-based solutions](./Chapter05/05_03_events/)
+- [Develop message-based solutions](./Chapter05/05_04_messages/)
+
 ## Az CLI Comandi
 
 | Comando | Descrizione |
