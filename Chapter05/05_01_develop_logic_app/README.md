@@ -10,3 +10,6 @@
 - Tigger e Action sono messi insieme in connectors. I connectors si usano per accedere ai dati, eventi e azioni di altri servizi o applicazioni
 - Ci sono migliaia di connectors
 - Un custom connector è praticamente un wrapper per una REST o SOAP API
+- Posso esportare le logic app in ARM template. Posso farlo da browser, vistual studio e CLI
+- Per esportare le lodic app con visual studio devo installare [questo tool](https://marketplace.visualstudio.com/items?itemName=VinaySinghMSFT.AzureLogicAppsToolsForVS2019)
+- 
