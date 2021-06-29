@@ -1,15 +1,14 @@
 #!/bin/bash
 #Azure CLI template deployment
 
-RESOURCE_GROUP=az204-marco-event-grid-topic-rg
 RESOURCE_GROUP_LOCATION="UK South"
-AZURE_STORAGE_ACCOUNT_NAME=marcoeventstorage
 DEPLOYMENT_NAME=AZ204-Marco-Dep
-ARM_TEMPLATE=arm-event-grid-topic.json
-OVERRIDE_PROPS=arm-event-grid-topic-param.json
+
+ARM_TEMPLATE=arm-create-http-function-template.json
+OVERRIDE_PROPS=arm-function-param.json
 
 # Props to override
-TOPIC_NAME=az204-marco-event-grid-topic
+FUNC_APP_NAME=Az204MarcoEventsFunc
 
 ../../Misc/Scripts/selectSubscription.sh
 
@@ -30,7 +29,11 @@ then
 	######################################
 	# Createing the resource group
 	######################################
-	az group create --name $RESOURCE_GROUP --location "$RESOURCE_GROUP_LOCATION"
+	az group list --output table
+	read -p "Select the resource group: " RESOURCE_GROUP
+
+	az resource list --output table
+	read -p "Select the storage account name: " STORAGE_ACCOUNT_NAME
 	
 	######################################
 	# I need to retrieve the Azure val
@@ -39,12 +42,12 @@ then
 	# I want to use when creating the 
 	# resource using the ARM template
 	######################################
-	APP_LOCATION=$(az group show --name $RESOURCE_GROUP --query location --output tsv)
+	REGION_AZ_VAL=$(az group show --name $RESOURCE_GROUP --query location --output tsv)
 
 	NEW_OVERRIDE_PROPS=tempParam.json
 	cp $OVERRIDE_PROPS $NEW_OVERRIDE_PROPS
-	sed -i 's/TOPIC_NAME/'"$TOPIC_NAME"'/' $NEW_OVERRIDE_PROPS
-	sed -i 's/LOCATION/'"$APP_LOCATION"'/' $NEW_OVERRIDE_PROPS
+	sed -i 's/FUNC_APP_NAME/'"$FUNC_APP_NAME"'/' $NEW_OVERRIDE_PROPS
+	sed -i 's/STORAGE_ACCOUNT_NAME/'"$STORAGE_ACCOUNT_NAME"'/' $NEW_OVERRIDE_PROPS
 	
 	######################################
 	# Createing the resource in the
@@ -60,27 +63,12 @@ then
 	
 	rm $NEW_OVERRIDE_PROPS
 	
-	while ! [[ "$STORAGE_OPTION" =~ ^(0|1)$ ]] 
-	do
-	echo ""
-	echo "0) Create Storage Account"
-	echo "1) No"
-	echo ""
-	read -p "Do you want to create a storage account?: " STORAGE_OPTION
-	echo ""
-	done
-	
-	echo "You choose $STORAGE_OPTION"
-
-	if [ $STORAGE_OPTION = 0 ]
-	then  
-		az storage account create --name $AZURE_STORAGE_ACCOUNT_NAME --location $APP_LOCATION --resource-group $RESOURCE_GROUP --sku Standard_LRS
-	fi
 fi
-
 
 if [ $EXEC_OPTION = 1 ]
 then
+	az group list --output table
+	read -p "Select the resource group: " RESOURCE_GROUP
 	az group delete --name $RESOURCE_GROUP --yes
 fi
 
