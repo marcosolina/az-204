@@ -1,0 +1,97 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hub_name_space": {
+            "defaultValue": "az204-marco-namespace-hub",
+            "type": "string"
+        },
+        "hub_name": {
+            "defaultValue": "az204-marco-noti-hub",
+            "type": "string"
+        },
+        "hub_location": {
+            "defaultValue": "uksouth",
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.NotificationHubs/namespaces",
+            "apiVersion": "2017-04-01",
+            "name": "[parameters('hub_name_space')]",
+            "location": "[parameters('hub_location')]",
+            "sku": {
+                "name": "Free"
+            },
+            "kind": "NotificationHub",
+            "properties": {
+                "provisioningState": "Succeeded",
+                "status": "Active",
+                "serviceBusEndpoint": "[concat('https://', parameters('hub_name_space'), '.servicebus.windows.net:443/')]",
+                "enabled": true,
+                "critical": false,
+                "namespaceType": "NotificationHub"
+            }
+        },
+        {
+            "type": "Microsoft.NotificationHubs/namespaces/AuthorizationRules",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(parameters('hub_name_space'), '/RootManageSharedAccessKey')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.NotificationHubs/namespaces', parameters('hub_name_space'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen",
+                    "Manage",
+                    "Send"
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.NotificationHubs/namespaces/notificationHubs",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(parameters('hub_name_space'), '/', parameters('hub_name'))]",
+            "location": "[parameters('hub_location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.NotificationHubs/namespaces', parameters('hub_name_space'))]"
+            ],
+            "properties": {
+                "registrationTtl": "10675199.02:48:05.4775807",
+                "authorizationRules": []
+            }
+        },
+        {
+            "type": "Microsoft.NotificationHubs/namespaces/notificationHubs/AuthorizationRules",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(parameters('hub_name_space'), '/', parameters('hub_name'), '/DefaultFullSharedAccessSignature')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.NotificationHubs/namespaces/notificationHubs', parameters('hub_name_space'), parameters('hub_name'))]",
+                "[resourceId('Microsoft.NotificationHubs/namespaces', parameters('hub_name_space'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen",
+                    "Manage",
+                    "Send"
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.NotificationHubs/namespaces/notificationHubs/AuthorizationRules",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(parameters('hub_name_space'), '/', parameters('hub_name'), '/DefaultListenSharedAccessSignature')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.NotificationHubs/namespaces/notificationHubs', parameters('hub_name_space'), parameters('hub_name'))]",
+                "[resourceId('Microsoft.NotificationHubs/namespaces', parameters('hub_name_space'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen"
+                ]
+            }
+        }
+    ]
+}

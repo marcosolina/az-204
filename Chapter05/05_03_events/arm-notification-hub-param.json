@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hub_location": {
+            "value": "APP_LOCATION"
+        },
+        "hub_name_space": {
+            "value": "HUB_NAME_SPACE"
+        },
+        "hub_name": {
+            "value": "HUB_NAME"
+        }
+    }
+}
