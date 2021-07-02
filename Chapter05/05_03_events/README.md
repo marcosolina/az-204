@@ -25,3 +25,7 @@
 
 - Azure Event hub funziona come Event Grid, ma può gestire milioni di richieste al secondo
 - Quando publichi un evento hai un limite max di 1MB di dati per pubblicazione
+- Gli eventi sono salvati in partition key, e sono consegnati in ordine alla stessa partizione
+- Non posso cancellare eventi che arrivano nella partizione, devo aspettare che scadano per rimuoverli
+- Posso creare da 2 a 32 partizioni, una volta create non le posso modificare, quindi considera il massimo numero di downstream paralleli
+- I receiver li collego all'hub usando consumer groups
